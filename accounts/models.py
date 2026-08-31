@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.db.models.signals import post_save
@@ -13,13 +14,28 @@ class User(AbstractUser):
     
     
 class UserProfile(models.Model):
+    G = "---"
+    H = "Homme"
+    F = "Femme"
+    GENDER = {
+        G : "---",
+        H : "Homme",
+        F : "Femme",
+    }
+        
     user = models.OneToOneField(
-        'accounts.User', 
+        settings.AUTH_USER_MODEL, 
         on_delete=models.CASCADE,
     )
     
     # Fields goes here...
     #....................
+    
+    display_name = models.CharField(max_length=100, null=True, blank=True)
+    phone_number = models.IntegerField(null=True, blank=True)
+    address = models.TextField(max_length=255, null=True, blank=True)
+    date_of_birth = models.DateField(null=True, blank=True)
+    gender = models.CharField(max_length=5, choices=GENDER, default=GENDER["---"])
     
     # Fields ends here...
     
