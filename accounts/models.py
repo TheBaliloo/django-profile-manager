@@ -18,7 +18,10 @@ class UserProfile(models.Model):
         on_delete=models.CASCADE,
     )
     
-    age = models.PositiveIntegerField(null=True, blank=True)
+    # Fields goes here...
+    #....................
+    
+    # Fields ends here...
     
     def __str__(self):
         return f"Profile for {self.user.email}"
