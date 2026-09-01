@@ -4,7 +4,9 @@
 {% block title %}Edit your profile{% endblock title %} 
 
 {% block content %}
-    <form action="/"  method="post">
+
+    <form action="{% url 'edit' user_id=form.user.value %}"  method="post">
+
         {% csrf_token %}
 
         {% if form.non_field_errors %}
@@ -13,9 +15,20 @@
         </div>
         {% endif %}
 
-        {{form.as_p}}
+        {{ form.as_p }}
+
+        <div style="padding-bottom:5px">
+            <h2>{{ form.user.value }}</h2>
+            <div style="padding-bottom:5px; display:none">{% render_field form.user.label %} : {% render_field form.user %}</div>
+            <div style="padding-bottom:5px">{% render_field form.display_name.label %} : {% render_field form.display_name %}</div>
+            <div style="padding-bottom:5px">{% render_field form.phone_number.label %} : {% render_field form.phone_number %}</div>
+            <div style="padding-bottom:5px">{% render_field form.address.label %} : {% render_field form.address %}</div>
+            <div style="padding-bottom:5px">{% render_field form.date_of_birth.label %} : {% render_field form.date_of_birth %}</div>
+            <div style="padding-bottom:5px">{% render_field form.gender.label %} : {% render_field form.gender %}</div>
+        </div>
 
         <button type="submit">Save</button>
 
     </form>
+
 {% endblock content %}
