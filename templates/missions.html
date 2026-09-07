@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Missions{% endblock title %}
+
+{% block content %}
+<h2>Liste des missions</h2>
+<ul>
+    {% for mission in missions %}
+        <li>{{ mission.numero }} - <u>{{ mission.type }}</u> - {{ mission.date_heure }} : (<i><b> {{ mission.etat }}</b></i>) <a href= {% url 'mission_edit' mission.id %}>Edit</a> | <a href={% url "mission_delete" mission.id %} onclick=confirmation();>Delete</a></li>
+    {% endfor %}
+</ul>
+<a href={% url "home" %}>Home | <a href={% url "mission_add" %}>Add</a></a>
+
+<script type="text/javascript">
+    function confirmation() {
+        if (confirm("Delete selected item ?"))
+        {
+            return true;
+        } else {
+            event.stopPropagation();
+            event.preventDefault();
+        };
+    }
+</script>
+{% endblock content %}

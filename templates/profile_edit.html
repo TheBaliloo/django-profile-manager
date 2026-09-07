@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block title %} Edit your profile {% endblock title %}
+
+{% block content %}
+    <form action={% url "profile_edit" form.user.value %} method="post">
+        {% csrf_token %}
+        
+        {% if form.non_field_errors %}
+        <div>
+            {{ form.nom_field_errors }}
+        </div>
+        {% endif %}
+
+        {% comment %} {{ form.as_p }} {% endcomment %}
+
+        <div>
+            <h2>{{ form.user.value }}</h2>
+            <div style="padding-bottom:5px; display:none">{% render_field form.user.label %} : {% render_field form.user %}</div>
+            <div style="padding-bottom:5px">{% render_field form.display_name.label %} : {% render_field form.display_name %}</div>
+            <div style="padding-bottom:5px">{% render_field form.phone_number.label %} : {% render_field form.phone_number %}</div>
+            <div style="padding-bottom:5px">{% render_field form.address.label %} : {% render_field form.address %}</div>
+            <div style="padding-bottom:5px">{% render_field form.date_of_birth.label %} : {% render_field form.date_of_birth %}</div>
+            <div style="padding-bottom:5px">{% render_field form.gender.label %} : {% render_field form.gender %}</div>
+        </div>
+
+        <button type="submit">Save</button>
+    </form>
+    <hr>
+    <a href={% url "home" %}>Home</a> / <a href={% url "profiles" %}>Profiles</a>
+{% endblock content %}

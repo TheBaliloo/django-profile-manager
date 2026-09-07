@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm as BaseUserCreationForm , UserChangeForm as BaseUserChangeForm
 from django import forms
 
-from .models import User, UserProfile
+from .models import User, UserProfile, Mission
 
 class UserCreationForm(BaseUserCreationForm):
     class Meta:
@@ -18,4 +18,9 @@ class UserChangeForm(BaseUserChangeForm):
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
+        fields = "__all__"
+        
+class MissionForm(forms.ModelForm):
+    class Meta:
+        model = Mission
         fields = "__all__"

@@ -1,13 +1,10 @@
 {% extends "base.html" %}
-{% load widget_tweaks %}
 
 {% block title %}Home{% endblock title %} 
 
 {% block content %}
     <ul>
-    {% for user in users %}
-        <li>{{ user.id }} - {{ user.username }} : {{ user.email }}</li>
-        <a href="/edit/{{user.id}}">Edit</a>
-    {% endfor %}
+        <li><a href= {% url "profiles" %}>Liste des profiles des utilisateurs</a></li>
+        <li><a href= {% url "missions" %}>Liste des mission</a></li>
     </ul>
 {% endblock content %}

@@ -50,3 +50,39 @@ class UserProfile(models.Model):
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         UserProfile.objects.get_or_create(user=instance)
+        
+class Mission(models.Model):
+    #MISSION TYPES CHOICES
+    NN = "---"
+    BR = "Brouillage"
+    CC = "Controle de conformite"
+    PH = "Controle Points Hauts"
+    EMF = "Mesure EMF"
+    
+    MISSION_TYPE = {
+        NN : "---",
+        BR : "Brouillage",
+        CC : "Controle de conformite",
+        PH : "Controle Points Hauts",
+        EMF : "Mesure EMF",
+    }
+    
+    #ETAT CHOICES
+    NN = "---"
+    WAITING = "En attente"
+    RUNNING = "En cours"
+    DONE = "Teminee"
+    
+    ETAT = {
+        NN : "---",
+        WAITING : "En attente",
+        RUNNING : "En cours",
+        DONE : "Terminee",
+    }
+    
+    numero = models.CharField(max_length=5, blank=False, null=False)
+    date_heure = models.DateTimeField(auto_now=False, blank=True, null=True)
+    type = models.CharField(max_length=25, choices=MISSION_TYPE, default=MISSION_TYPE["---"])
+    region = models.CharField(max_length=50, null=True, blank=True)
+    etat =  models.CharField(max_length=25, choices=ETAT, default=ETAT["---"])
+    responsable = models.CharField(max_length=50, null=True, blank=True)

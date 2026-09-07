@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block title %}Edit your profile{% endblock title %}
+
+{% block content %}
+    <form action= {% url "mission_edit" form.instance.id%} method="post">
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+        <div>
+            {{ from.non_field_errors }}
+        </div>
+        {% endif %}
+
+        {{ form.as_p }}
+
+        {% comment %} <div>
+            <h2>{{ form.user.value }}</h2>
+            <div style="padding-bottom:5px; display:none">{% render_field form.user.label %} : {% render_field form.user %}</div>
+            <div style="padding-bottom:5px">{% render_field form.display_name.label %} : {% render_field form.display_name %}</div>
+            <div style="padding-bottom:5px">{% render_field form.phone_number.label %} : {% render_field form.phone_number %}</div>
+            <div style="padding-bottom:5px">{% render_field form.address.label %} : {% render_field form.address %}</div>
+            <div style="padding-bottom:5px">{% render_field form.date_of_birth.label %} : {% render_field form.date_of_birth %}</div>
+            <div style="padding-bottom:5px">{% render_field form.gender.label %} : {% render_field form.gender %}</div>
+        </div> {% endcomment %}
+
+        <button type="submit">Save</button>
+    </form>
+    <hr>
+    <a href={% url "home" %}>Home</a> | <a href={% url "missions" %}>Missions</a>
+{% endblock content %}

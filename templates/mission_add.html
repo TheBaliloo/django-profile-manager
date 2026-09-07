@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block title %}Add a new mission{% endblock title %}
+
+{% block content %}
+    <form action={% url "mission_add" %} method="post">
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+        <div>
+            {{ form.non_field_errors }}
+        </div>
+        {% endif %}
+
+        {{ form.as_p }}
+
+        <button  type="submit">Save</button>
+    </form>
+
+    <hr>
+    <a href={% url "home" %}>Home</a> | <a href={% url "missions" %}>Missions</a>
+{% endblock content %}
